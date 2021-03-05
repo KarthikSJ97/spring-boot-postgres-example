@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping(value = "/api")
 public class CustomerController {
@@ -23,13 +25,13 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/{id}")
-    public ResponseEntity<Object> getCustomerById(@PathVariable("id") long id) {
+    public ResponseEntity<Object> getCustomerById(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/customer/{id}")
     @ResponseStatus(reason = "user deleted", code = HttpStatus.NO_CONTENT)
-    public void deleteCustomer(@PathVariable("id") long id) {
+    public void deleteCustomer(@PathVariable("id") UUID id) {
         customerService.deleteCustomer(id);
     }
 

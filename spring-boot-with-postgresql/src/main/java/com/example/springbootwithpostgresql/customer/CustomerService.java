@@ -6,6 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CustomerService {
@@ -21,12 +22,12 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Optional<CustomerEntity> getCustomerById(long id) {
+    public Optional<CustomerEntity> getCustomerById(UUID id) {
         return Optional.ofNullable(customerRepository.findById(id)
                 .orElseThrow(() -> new CustomNotFoundException("customer details not found")));
     }
 
-    public void deleteCustomer(long id) {
+    public void deleteCustomer(UUID id) {
         try {
             customerRepository.deleteById(id);
         } catch(EmptyResultDataAccessException e) {
